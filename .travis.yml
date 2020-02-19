@@ -1,0 +1,21 @@
+dist: xenial
+branches:
+  only:
+  - master
+  - develop
+language: node_js
+node_js: '10'
+cache:
+  directories:
+  - node_modules
+jobs:
+  include:
+  - script:
+    - cd Nasa-Test
+      && npm install && npm run lint && npm run build && npm run test
+    name: Build Outreach-Interviews
+stages:
+- test
+env:
+  global:
+    secure: nXQ8KYec9k0qQYp7Jj4FUqvsb/g9cCigVybmPM5cIQaEXN076P9a5gP5AOS5iAsxPm4vewUf6mCV9BfAKEfmyPel2IPRAAep+TPw3DuEyXYoPhQUS1oBdbjFgFLwhj8og/YUg4DgCR90wJ9Yrn4YyVDLFVW1St7tFQEvIikJ+19hGYv5LjzBvo9gYpshZ6lrOVGYfkB+VJr9Cmc92njIraoqgaCWQhZuaOcr3yN2ux2lUjO0kJ8X80w4nKdMo4a+cRwPhG92wOcRWdbUZYqPQKu5VjIIbbpf5BYTphEf9wGHG6n8US4eNFWUy+VobEYesmHO3YZRGXne49xkoJQ/GuIDA9NFwTCCqsPzD4YyzeXmjtQ+BXb1BjdIm8k2TmIrguAM9BfxJ8okLVmW5zNMk5Dg+DETWhqCOnR43EX7u8DoJQP99STvRSLWeVyiJVvDzyKovctFhIojmM7Twpqp96UX9tiM7Je5J27uoVj3I5bgaQNMhyRccpP9edA20n0DFzF/BdyGJVUo/FOujcIP1u4o+tU781fA9o0fSX9wYQoiNd6nBHg2oRCtWmv7V2WgsxIiEiY7UzlnecxfJT1avuoJLnjFX25iih/uv3YpV4EDrojq0BDu39rCzosf+k3U4yEA98oFwNsBMe4GLKA+IWLrLtF/sggIvoO4XPs72qw=
