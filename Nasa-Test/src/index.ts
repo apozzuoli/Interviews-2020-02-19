@@ -20,40 +20,32 @@ app.get( '/daily', async ( request: any, response: any ) => {
     response.send(result);
 } );
 
-/** Fetches the pictures of the day for each date in the request
-* Idea would be to take in the string, split it by its commas, then sort by the
-* date. Make a series of requests with those dates to DailyImage then return the
-* image output.
-*
-*
-* @param request the dates separated by commas
-*
-*/
-app.get('/timeline', async(request: string, response: string[]) => {
+app.get('/timeline', async(request: any, response: any) => {
 
-    /* array of times*/
-    const times[] = request.split(",");
+    const timeline = new DailyImage();
+    const datesRequest = request.query.dates;
 
-    /*daily image class*/
-    const img = new DailyImage();
+    const times = datesRequest.split(',');
 
-    const dates[];
+
+    var dates = [];
     // fill dates array with date objects
-    for (i = 0 ; i < times.length ; i++) {
+    for (var i = 0 ; i < times.length ; i++) {
         dates[i] = new Date(times[i]);
     }
 
-    /*sort the dates*/
-    const sortedDates = dates.sort((a,b) => b.date - a.date);
+    // sort the dates
+    dates.sort((a,b) => a.getTime() - b.getTime());
 
-    const result[];
+    var result = [];
 
-    //make an image request in order of dates
-    for (i = 0 ; i < sortedDates.length ; i++) {
-        result[i] = await img.getImageForDate(sortedDates[i].format('YYYY-MM-DD'));
+    // make an image request in order of dates
+    for (var i = 0 ; i < dates.length ; i++) {
+        var img = await timeline.getImageForDate(moment(dates[i]).format('YYYY-MM-DD'))
+        result[i] = img;
     }
 
-    response.send(result);
+    response.send('{timeline: ' + JSON.stringify(result) + '}');
 
 } );
 
