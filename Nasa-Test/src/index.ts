@@ -31,11 +31,14 @@ app.get('/timeline', async(request: any, response: any) => {
     var dates = [];
     // fill dates array with date objects
     for (var i = 0 ; i < times.length ; i++) {
-        dates[i] = new Date(times[i]);
+        dates[i] = times[i];
+        //dates[i] = new Date(times[i]);
     }
 
+    dates = timeline.sortDates(dates);
+
     // sort the dates
-    dates.sort((a,b) => a.getTime() - b.getTime());
+    // dates.sort((a,b) => a.getTime() - b.getTime());
 
     var result = [];
 

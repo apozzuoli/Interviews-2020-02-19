@@ -46,4 +46,21 @@ describe('daily_image_tests', () => {
             }
         );
     });
+
+    it('dates in order', async () => {
+        const daily = new DailyImage();
+        const result = daily.sortDates(['2019-10-10','2019-02-05','2020-01-01']);
+        const res = [
+            new Date('2019-02-05'),
+            new Date('2019-10-10'), 
+            new Date('2020-01-01')
+            ]
+        expect(result).toEqual(res);
+    });
+
+    it('invalid dates array', async () => {
+        const daily = new DailyImage();
+        const result = daily.sortDates(['a','b','c']);
+        expect(result).toBeUndefined();
+    });
 });

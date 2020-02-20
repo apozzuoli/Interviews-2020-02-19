@@ -59,4 +59,19 @@ export class DailyImage {
         return JSON.parse(resp);
     }
 
+    /**
+     * Sorts the dates in ascending order
+     * @param dates array of strings with YYYY-MM-DD format
+     */
+    public sortDates(dates: string[]) {
+        const sortedDates = [];
+        for (var i = 0 ; i < dates.length ; i++) {
+           sortedDates.push(new Date(dates[i])); 
+           if (isNaN(sortedDates[i].getTime())) {
+            return undefined;
+           }
+        }
+        return sortedDates.sort((a,b) => a.getTime() - b.getTime());
+    }
+
 }
